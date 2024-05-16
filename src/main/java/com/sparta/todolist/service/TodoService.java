@@ -51,6 +51,21 @@ public class TodoService {
         return id;
     }
 
+    public Long deleteTodo(Long id,String password) {
+        // 해당 메모가 DB에 존재하는지 확인
+        Todo todo = getTodo(id);
+
+        // 비밀번호가 맞는지 확인
+        if (password.equals(todo.getPassword())) {
+            // memo 내용 수정
+            todoRepository.delete(todo);
+        } else {
+            throw new IllegalArgumentException("비밀번호가 틀렸습니다.");
+        }
+        return id;
+    }
+
+
     public Todo getTodo(Long id) {
         return todoRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("선택한 일정은 존재하지 않습니다.")

@@ -36,4 +36,9 @@ public class TodoController {
         return todoService.updateTodo(id, requestDto);
     }
 
+    @DeleteMapping("/todos/{id}")
+    public Long deleteMemo(@PathVariable Long id, @RequestHeader("Password") String password) {
+        return todoService.deleteTodo(id,password);
+    }
+
 }
