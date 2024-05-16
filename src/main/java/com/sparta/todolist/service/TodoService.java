@@ -6,6 +6,8 @@ import com.sparta.todolist.entity.Todo;
 import com.sparta.todolist.repository.TodoRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TodoService {
     private final TodoRepository todoRepository;
@@ -28,5 +30,10 @@ public class TodoService {
         return todoRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("선택한 일정은 존재하지 않습니다.")
         );
+    }
+
+    public List<TodoResponseDto> getTodos() {
+        // DB 조회
+        return todoRepository.findAllByOrderByCreatedAtDesc().stream().map(TodoResponseDto::new).toList();
     }
 }

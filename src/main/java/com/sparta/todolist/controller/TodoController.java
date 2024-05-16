@@ -5,6 +5,8 @@ import com.sparta.todolist.dto.TodoResponseDto;
 import com.sparta.todolist.service.TodoService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 public class TodoController {
@@ -22,5 +24,10 @@ public class TodoController {
     @GetMapping("/todo/{id}")
     public TodoResponseDto getTodos(@PathVariable Long id) {
         return new TodoResponseDto(todoService.getTodo(id));
+    }
+
+    @GetMapping("/todos")
+    public List<TodoResponseDto> getTodos() {
+        return todoService.getTodos();
     }
 }
