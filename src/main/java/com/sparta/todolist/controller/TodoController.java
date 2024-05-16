@@ -30,4 +30,10 @@ public class TodoController {
     public List<TodoResponseDto> getTodos() {
         return todoService.getTodos();
     }
+
+    @PutMapping("/todos/{id}")
+    public Long updateMemo(@PathVariable Long id, @RequestBody TodoRequestDto requestDto) {
+        return todoService.updateTodo(id, requestDto);
+    }
+
 }
