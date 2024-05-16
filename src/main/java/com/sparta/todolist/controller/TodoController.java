@@ -2,12 +2,8 @@ package com.sparta.todolist.controller;
 
 import com.sparta.todolist.dto.TodoRequestDto;
 import com.sparta.todolist.dto.TodoResponseDto;
-import com.sparta.todolist.entity.Todo;
 import com.sparta.todolist.service.TodoService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
@@ -20,8 +16,11 @@ public class TodoController {
 
     @PostMapping("/todos")
     public TodoResponseDto createTodo(@RequestBody TodoRequestDto requestDto) {
-        // requestDto -> Entity
-        Todo todo = new Todo(requestDto);
         return todoService.createTodo(requestDto);
+    }
+
+    @GetMapping("/todo/{id}")
+    public TodoResponseDto getTodos(@PathVariable Long id) {
+        return new TodoResponseDto(todoService.getTodo(id));
     }
 }

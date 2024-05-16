@@ -23,4 +23,10 @@ public class TodoService {
 
         return new TodoResponseDto(saveTodo);
     }
+
+    public Todo getTodo(Long id) {
+        return todoRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("선택한 일정은 존재하지 않습니다.")
+        );
+    }
 }
