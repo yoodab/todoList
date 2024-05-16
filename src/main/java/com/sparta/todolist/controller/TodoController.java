@@ -32,13 +32,14 @@ public class TodoController {
     }
 
     @PutMapping("/todos/{id}")
-    public Long updateMemo(@PathVariable Long id, @RequestBody TodoRequestDto requestDto) {
+    public Long updateTodo(@PathVariable Long id, @RequestBody TodoRequestDto requestDto) {
         return todoService.updateTodo(id, requestDto);
     }
 
     @DeleteMapping("/todos/{id}")
-    public Long deleteMemo(@PathVariable Long id, @RequestHeader("Password") String password) {
+    public Long deleteTodo(@PathVariable Long id, @RequestHeader("Password") String password) {
         return todoService.deleteTodo(id,password);
     }
+
 
 }
