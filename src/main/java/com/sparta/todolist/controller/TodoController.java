@@ -3,6 +3,7 @@ package com.sparta.todolist.controller;
 import com.sparta.todolist.dto.TodoRequestDto;
 import com.sparta.todolist.dto.TodoResponseDto;
 import com.sparta.todolist.service.TodoService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class TodoController {
     }
 
     @PostMapping("/todos")
-    public TodoResponseDto createTodo(@RequestBody TodoRequestDto requestDto) {
+    public TodoResponseDto createTodo(@Valid @RequestBody TodoRequestDto requestDto) {
         return todoService.createTodo(requestDto);
     }
 
@@ -32,12 +33,12 @@ public class TodoController {
     }
 
     @PutMapping("/todos/{id}")
-    public Long updateTodo(@PathVariable Long id, @RequestBody TodoRequestDto requestDto) {
+    public Long updateTodo(@PathVariable Long id,@Valid @RequestBody TodoRequestDto requestDto) {
         return todoService.updateTodo(id, requestDto);
     }
 
     @DeleteMapping("/todos/{id}")
-    public Long deleteTodo(@PathVariable Long id, @RequestHeader("Password") String password) {
+    public Long deleteTodo(@PathVariable Long id, @RequestHeader(required = false) String password) {
         return todoService.deleteTodo(id,password);
     }
 
